@@ -1,0 +1,13 @@
+Todo Questions:
+ - default label/input association?
+ - which input tags need to be/should be closed?
+ - i forgot, but script tags need to be closed
+ - why does everything use a factory function instead of new?
+ - why/when is ember-data required?
+ - how to dynamically set properties on load? (place holder for ex.)
+ - What is the difference between what's on the model and the controller as defaults?
+ - why are some props on handlebars stuff strings and others not? is it because of how they are compiled?
+ - why do some controller methods take params?
+ - why do controller methods seem to get called twice? (ex. removeTodo)?
+ - is the todosIndexRoute unnecessary after the IndexRoute is declared?
+ - why do subroutes use this?

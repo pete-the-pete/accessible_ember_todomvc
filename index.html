@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Emberjs TODO - MVC</title>
+  <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+  <script type="text/x-handlebars" data-template-name="todos">
+  <section id="todoapp">
+    <header id="header">
+      <h1>todos</h1>
+      {{input type="text" id="new-todo" placeholder=placeHolder 
+        value=newTitle action="createTodo"}}
+    </header>
+
+    <section id="main">
+      {{outlet}}
+      <input type="checkbox" id="toggle-all">
+    </section>
+
+    <footer id="footer">
+        <span id="todo-count">
+          <strong>{{remaining}}</strong> {{inflection}} left
+        </span>
+        <ul id="filters">
+          <li>
+            <!-- <a href="all" class="selected">All</a> -->
+            {{#link-to "todos.index" activeClass="selected"}}All{{/link-to}}
+          </li>
+          <li>
+            {{#link-to "todos.active" activeClass="selected"}}Active{{/link-to}}
+          </li>
+          <li>
+            {{#link-to "todos.completed" activeClass="selected"}}Completed{{/link-to}}
+          </li>
+        </ul>
+
+        <button id="clear-completed">
+          Clear completed (1)
+        </button>
+      </footer>
+    </section>
+
+    <footer id="info">
+      <p>Double-click to edit a todo</p>
+    </footer>
+
+    </script>
+    <!-- end index template -->
+
+    <!-- todos template -->
+    <script type="text/x-handlebars" data-template-name="todos/index">
+      <ul id="todo-list">
+        {{#each itemController="todo"}}
+          <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
+          {{#view Todos.ItemView}}
+            {{#if isEditing}}
+              {{edit-todo class="edit" value=title focus-out="acceptChanges" insert-newline="acceptChanges"}}
+            {{else}}
+              {{input type="checkbox" class="toggle" checked=toggleComplete viewName="checkBox"}}
+              <label {{action "editTodo" on="doubleClick"}} {{bindAttr for="view.checkBox.elementId"}}>{{title}}</label>
+              <button {{action "removeTodo" }} class="destroy"></button>
+            {{/if}}
+          {{/view}}
+          </li>
+        {{/each}}
+      </ul>
+    </script>
+    <!-- end todos template -->
+
+    <script type="text/javascript" src="lib/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/handlebars.min.js"></script>
+    <script type="text/javascript" src="lib/ember.js"></script>
+    <script type="text/javascript" src="lib/ember-data.js"></script>
+    <!-- my stuff -->
+    <script type="text/javascript" src="js/application.js"></script>
+    <script type="text/javascript" src="js/router.js"></script>
+    <script type="text/javascript" src="js/models/todo.js"></script>
+    <script type="text/javascript" src="js/controllers/todos_controller.js"></script>
+    <script type="text/javascript" src="js/controllers/todo_controller.js"></script>
+    <script type="text/javascript" src="js/views/edit_todo_view.js"></script>
+    <script type="text/javascript" src="js/views/fieldset_view.js"></script>
+  </body>
+</html>
