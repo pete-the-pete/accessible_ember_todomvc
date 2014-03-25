@@ -10,4 +10,23 @@ Todo Questions:
  - why do some controller methods take params?
  - why do controller methods seem to get called twice? (ex. removeTodo)?
  - is the todosIndexRoute unnecessary after the IndexRoute is declared?
- - why do subroutes use this?
+ - why do subroutes use `this`?
+ - do you _really_ have to declare/extend another route for each subroute?
+ - can you have subroutes in another file and pull them in dynamically?
+
+
+ A11y
+  - should this not be a form?
+  - SHOULD this be in a form?
+  - what needs to happen for a11y
+     - fieldset text
+     - edit link to edit a field (screen-reader-link/button)
+     - better button text
+     - focus after creating
+     - focus after removing
+     - focus after filters
+     - better filter names
+
+
+resources:
+ http://stackoverflow.com/questions/15326337/ember-js-view-isvisible-or-any-variable-binding-to-controller-state

@@ -10,8 +10,10 @@
   <section id="todoapp">
     <header id="header">
       <h1>todos</h1>
-      {{input type="text" id="new-todo" placeholder=placeHolder 
-        value=newTitle action="createTodo"}}
+      {{input type="text" id="new-todo" placeholder=placeHolder value=newTitle action="createTodo"}}
+      <label for="new-todo">
+        <span class="screen-reader-text">Create a new to do item.</span>
+      </label>
     </header>
 
     <section id="main">
@@ -25,7 +27,6 @@
         </span>
         <ul id="filters">
           <li>
-            <!-- <a href="all" class="selected">All</a> -->
             {{#link-to "todos.index" activeClass="selected"}}All{{/link-to}}
           </li>
           <li>
@@ -53,17 +54,23 @@
     <script type="text/x-handlebars" data-template-name="todos/index">
       <ul id="todo-list">
         {{#each itemController="todo"}}
-          <li {{bind-attr class="isCompleted:completed isEditing:editing"}}>
-          {{#view Todos.ItemView}}
+          {{#view Todos.TodoView}}
             {{#if isEditing}}
-              {{edit-todo class="edit" value=title focus-out="acceptChanges" insert-newline="acceptChanges"}}
+              {{edit-todo class="edit" value=title focus-out="acceptChanges" insert-newline="acceptChanges" viewName="createTodo"}}
+              <label {{bind-attr for="view.createTodo.elementId"}}>
+                <span class="screen-reader-text">edit this to do item.</span>
+              </label>
             {{else}}
               {{input type="checkbox" class="toggle" checked=toggleComplete viewName="checkBox"}}
-              <label {{action "editTodo" on="doubleClick"}} {{bindAttr for="view.checkBox.elementId"}}>{{title}}</label>
-              <button {{action "removeTodo" }} class="destroy"></button>
+              <label {{action "editTodo" on="doubleClick"}} {{bind-attr for="view.checkBox.elementId"}}>
+                {{title}}
+              </label>
+              <button class="screen-reader-text" {{action "editTodo"}}>edit {{title}}</button>
+              <button {{action "removeTodo"}} class="destroy">
+                <span class="screen-reader-text">Remove {{title}} item</span>
+              </button>
             {{/if}}
           {{/view}}
-          </li>
         {{/each}}
       </ul>
     </script>
@@ -80,6 +87,6 @@
     <script type="text/javascript" src="js/controllers/todos_controller.js"></script>
     <script type="text/javascript" src="js/controllers/todo_controller.js"></script>
     <script type="text/javascript" src="js/views/edit_todo_view.js"></script>
-    <script type="text/javascript" src="js/views/fieldset_view.js"></script>
+    <script type="text/javascript" src="js/views/todo_view.js"></script>
   </body>
 </html>
