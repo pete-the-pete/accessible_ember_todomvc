@@ -19,6 +19,7 @@
     <section id="main">
       {{outlet}}
       <input type="checkbox" id="toggle-all">
+      <label for="toggle-all" class="screen-reader-text">Mark all as completed</label>
     </section>
 
     <footer id="footer">
@@ -27,13 +28,19 @@
         </span>
         <ul id="filters">
           <li>
-            {{#link-to "todos.index" activeClass="selected"}}All{{/link-to}}
+            {{#link-to "todos.index" activeClass="selected"}}
+              <span class="screen-reader-text">see</span> All
+            {{/link-to}}
           </li>
           <li>
-            {{#link-to "todos.active" activeClass="selected"}}Active{{/link-to}}
+            {{#link-to "todos.active" activeClass="selected"}}
+              <span class="screen-reader-text">see only</span> Active
+            {{/link-to}}
           </li>
           <li>
-            {{#link-to "todos.completed" activeClass="selected"}}Completed{{/link-to}}
+            {{#link-to "todos.completed" activeClass="selected"}}
+              <span class="screen-reader-text">see only</span> Completed
+            {{/link-to}}
           </li>
         </ul>
 
@@ -57,8 +64,8 @@
           {{#view Todos.TodoView}}
             {{#if isEditing}}
               {{edit-todo class="edit" value=title focus-out="acceptChanges" insert-newline="acceptChanges" viewName="createTodo"}}
-              <label {{bind-attr for="view.createTodo.elementId"}}>
-                <span class="screen-reader-text">edit this to do item.</span>
+              <label {{bind-attr for="view.createTodo.elementId"}} class="screen-reader-text">
+                edit this to do item.
               </label>
             {{else}}
               {{input type="checkbox" class="toggle" checked=toggleComplete viewName="checkBox"}}

@@ -19,13 +19,15 @@ Todo Questions:
   - should this not be a form?
   - SHOULD this be in a form?
   - what needs to happen for a11y
-     - fieldset text
-     - edit link to edit a field (screen-reader-link/button)
-     - better button text
+     - edit link to edit a field (screen-reader-link/button) DONE
+     - better button text  INPROGRESS
      - focus after creating
      - focus after removing
      - focus after filters
      - better filter names
+     - aria to say 'finished' or something?
+     - aria to read out remaining?
+     - toggle label of checkall
 
 
 resources:
