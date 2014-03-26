@@ -18,7 +18,7 @@
 
     <section id="main">
       {{outlet}}
-      <input type="checkbox" id="toggle-all">
+      {{input type="checkbox" id="toggle-all" checked=allAreDone}}
       <label for="toggle-all" class="screen-reader-text">Mark all as completed</label>
     </section>
 
@@ -44,9 +44,11 @@
           </li>
         </ul>
 
-        <button id="clear-completed">
-          Clear completed (1)
+        {{#if hasCompleted}}
+        <button id="clear-completed" {{ action "clearCompleted" }}>
+          Clear completed ({{completed}})
         </button>
+        {{/if}}
       </footer>
     </section>
 

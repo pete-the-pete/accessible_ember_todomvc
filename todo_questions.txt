@@ -22,7 +22,8 @@ Todo Questions:
      - edit link to edit a field (screen-reader-link/button) DONE
      - better button text  INPROGRESS
      - focus after creating
-     - focus after removing
+     - focus after removing (next until there are no more, then on the create field)
+      - including using the 'remove completed' button
      - focus after filters
      - better filter names
      - aria to say 'finished' or something?
