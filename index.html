@@ -69,10 +69,10 @@
               </label>
             {{else}}
               {{input type="checkbox" class="toggle" checked=toggleComplete viewName="checkBox"}}
+              <button class="edit-button screen-reader-text" {{action "editTodo"}}>edit {{title}}</button>
               <label {{action "editTodo" on="doubleClick"}} {{bind-attr for="view.checkBox.elementId"}}>
                 {{title}}
               </label>
-              <button class="screen-reader-text" {{action "editTodo"}}>edit {{title}}</button>
               <button {{action "removeTodo"}} class="destroy">
                 <span class="screen-reader-text">Remove {{title}} item</span>
               </button>
