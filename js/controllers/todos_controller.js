@@ -1,5 +1,7 @@
 Todos.TodosController = Ember.ArrayController.extend({
   placeHolder: 'I am the default. There are many like it, but this one is mine.',
+  activeItem: -1,
+  
   actions: {
     createTodo: function() {
       //get the title from the field
@@ -25,19 +27,24 @@ Todos.TodosController = Ember.ArrayController.extend({
       completed.invoke('save');
     }
   },
+  
   hasCompleted: function() {
     return this.get('completed') > 0;
   }.property('completed'),
+  
   completed: function() {
     return this.filterBy('isCompleted', true).get('length');
   }.property('@each.isCompleted'),
+  
   remaining: function() {
     return this.filterBy('isCompleted', false).get('length');
   }.property('@each.isCompleted'),
+
   inflection: function() {
     var remaining = this.get('remaining');
     return remaining === 1 ? 'item' : 'items';
   }.property('remaining'),
+  
   allAreDone: function(key, value) {
     if(value === undefined) {
       return !!this.get('length') && this.everyProperty('isCompleted', true);
