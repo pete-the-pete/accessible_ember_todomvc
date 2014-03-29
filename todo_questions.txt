@@ -33,3 +33,10 @@ Todo Questions:
 
 resources:
  http://stackoverflow.com/questions/15326337/ember-js-view-isvisible-or-any-variable-binding-to-controller-state
+
+ //passing the state around
+ http://stackoverflow.com/questions/14862973/how-to-communicate-between-controllers-in-ember-js
+ 
+ //focusing after render
+ http://madhatted.com/2013/6/8/lifecycle-hooks-in-ember-js-views
+ http://mavilein.github.io/javascript/2013/08/01/Ember-JS-After-Render-Event/

@@ -262,7 +262,6 @@ label[for='toggle-all'] {
 }
 
 #todo-list li .edit-button:focus + label {
-  outline: auto;
   outline: auto 5px -webkit-focus-ring-color
 }
 

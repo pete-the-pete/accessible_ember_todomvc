@@ -14,9 +14,9 @@ Todos.TodoController = Ember.ObjectController.extend({
     }
   }.property('model.isCompleted'),
 
-  setAutoFocusedItem: function(item) {
+  /*setAutoFocusedItem: function(item) {
     this.get('controllers.todos').set('activeItem', item.id);
-  },
+  },*/
 
   setShouldAutoFocus: function() {
     var activeItem = this.get('controllers.todos').get('activeItem');
@@ -35,11 +35,16 @@ Todos.TodoController = Ember.ObjectController.extend({
         this.send('removeTodo');
       } else {
         this.get('model').save();
-        this.setAutoFocusedItem(this.get('model'));
+        this.get('controllers.todos').setAutoFocusedItem(this.get('model'));
       }
     },
     removeTodo: function() {
-      var todo = this.get('model');      
+      var todo = this.get('model');
+
+      //figure out which element should be focused next
+      this.get('controllers.todos').setAutoFocusedItem(todo, true);
+
+      //delete the item and update the model
       todo.deleteRecord();
       todo.save();
     }

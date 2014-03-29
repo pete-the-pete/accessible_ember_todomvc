@@ -27,6 +27,30 @@ Todos.TodosController = Ember.ArrayController.extend({
       completed.invoke('save');
     }
   },
+
+  setAutoFocusedItem: function(item, removing) {
+    var allTodos,
+      length,
+      index;
+
+    if(removing) {
+      allTodos = this.get('model'),
+      length = allTodos.get('length') - 1,
+      index = allTodos.indexOf(item);
+
+      if(!length) {
+        this.setAutoFocusedItem(-1);
+      } else if(index === length) {
+        //autofocus the previous one
+        index--;
+      } else {
+        //autofocus the next one
+        index++;
+      }
+      item = allTodos.objectAt(index);
+    }
+    this.set('activeItem', item.id);
+  },
   
   hasCompleted: function() {
     return this.get('completed') > 0;
