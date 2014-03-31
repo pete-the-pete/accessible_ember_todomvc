@@ -10,12 +10,18 @@ Todos.TodoView = Ember.View.extend({
   }.property('controller.isEditing'),
 
   applyFocus: function() {
-    this.$().find('input:first').focus();
+    if(!this.get('isDestroying')) {
+      this.$().find('input:first').focus();
+    }
   },
 
+  didInsertElement: function() {
+    this.scheduleFocus();
+  },
+  
   scheduleFocus: function() {
     if(this.get('controller.shouldAutoFocus')) {
-        Ember.run.scheduleOnce('afterRender', this, this.applyFocus);
+      Ember.run.scheduleOnce('afterRender', this, this.applyFocus);
     }
   }.observes('controller.shouldAutoFocus')
 });

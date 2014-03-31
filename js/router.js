@@ -8,7 +8,7 @@ Todos.Router.map(function() {
 
 Todos.TodosIndexRoute = Ember.Route.extend({
   model: function() {
-    return this.modelFor('todos')
+    return this.modelFor('todos');
   }
 })
 
@@ -24,6 +24,9 @@ Todos.TodosActiveRoute = Ember.Route.extend({
       return !todo.get('isCompleted');
     });
   },
+  activate: function() {
+    this.controllerFor('todos').initFocusedItem();
+  },
   renderTemplate: function(controller) {
     this.render('todos/index', {controller: controller});
   }
@@ -34,6 +37,9 @@ Todos.TodosCompletedRoute = Ember.Route.extend({
     return this.store.filter('todo', function(todo) {
       return todo.get('isCompleted');
     });
+  },
+  activate: function() {
+    this.controllerFor('todos').initFocusedItem();
   },
   renderTemplate: function(controller) {
     this.render('todos/index', {controller: controller});

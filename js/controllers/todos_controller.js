@@ -28,6 +28,11 @@ Todos.TodosController = Ember.ArrayController.extend({
     }
   },
 
+  initFocusedItem: function() {
+    //NOTE: this needs to grab the first item of the filtered model, not the complete model
+    this.setAutoFocusedItem(this.get('model').objectAt(0));
+  },
+
   setAutoFocusedItem: function(item, removing) {
     var allTodos,
       length,

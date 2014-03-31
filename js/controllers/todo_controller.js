@@ -2,6 +2,7 @@ Todos.TodoController = Ember.ObjectController.extend({
   shouldAutoFocus: false,
   isEditing: false,
   needs: 'todos',
+
   toggleComplete: function(key, value) {
     var model = this.get('model');
 
@@ -14,14 +15,9 @@ Todos.TodoController = Ember.ObjectController.extend({
     }
   }.property('model.isCompleted'),
 
-  /*setAutoFocusedItem: function(item) {
-    this.get('controllers.todos').set('activeItem', item.id);
-  },*/
-
   setShouldAutoFocus: function() {
     var activeItem = this.get('controllers.todos').get('activeItem');
     this.set('shouldAutoFocus', (activeItem === this.get('model').id));
-
   }.observes('controllers.todos.activeItem'),
 
   actions: {
