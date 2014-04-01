@@ -14,6 +14,9 @@ Todo Questions:
  - do you _really_ have to declare/extend another route for each subroute?
  - can you have subroutes in another file and pull them in dynamically?
 
+ - why doesn't/how does the route know which controller to use? (naming convention seems wrong, unless auto created?)
+ - what is the controller param passed to the renderTemplate function?
+
 
  A11y
   - should this not be a form?

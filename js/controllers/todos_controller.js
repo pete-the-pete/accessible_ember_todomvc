@@ -1,6 +1,7 @@
 Todos.TodosController = Ember.ArrayController.extend({
   placeHolder: 'I am the default. There are many like it, but this one is mine.',
   activeItem: -1,
+  initialRoute: true,
   
   actions: {
     createTodo: function() {
@@ -28,15 +29,16 @@ Todos.TodosController = Ember.ArrayController.extend({
     }
   },
 
-  initFocusedItem: function() {
-    //NOTE: this needs to grab the first item of the filtered model, not the complete model
-    this.setAutoFocusedItem(this.get('model').objectAt(0));
-  },
-
   setAutoFocusedItem: function(item, removing) {
+
     var allTodos,
       length,
       index;
+
+    if(this.get('initialRoute')) {
+      this.set('initialRoute', false);
+      return;
+    }
 
     if(removing) {
       allTodos = this.get('model'),

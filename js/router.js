@@ -8,40 +8,49 @@ Todos.Router.map(function() {
 
 Todos.TodosIndexRoute = Ember.Route.extend({
   model: function() {
+    console.debug('i am the index');
     return this.modelFor('todos');
   }
-})
+});
 
-Todos.TodosRoute = Ember.Route.extend({
+Todos.LinkedRoute = Ember.Route.extend({
+  renderTemplate: function(controller, model) {
+
+    var that = this;
+    
+    Promise.all([
+      this.render('todos/index', {controller: controller})
+    ]).then(function() {
+      var todo = model.get('content').get('firstObject');
+      that.controllerFor('todos').setAutoFocusedItem(todo);
+    });
+  }
+});
+
+Todos.TodosRoute =  Ember.Route.extend({
   model: function() {
     return this.store.find('todo');
   }
 });
 
-Todos.TodosActiveRoute = Ember.Route.extend({
+Todos.TodosActiveRoute = Todos.LinkedRoute.extend({
   model: function() {
     return this.store.filter('todo', function(todo) {
       return !todo.get('isCompleted');
     });
   },
-  activate: function() {
-    this.controllerFor('todos').initFocusedItem();
-  },
-  renderTemplate: function(controller) {
-    this.render('todos/index', {controller: controller});
+  renderTemplate: function(controller, model) {
+    this._super(controller, model);
   }
 });
 
-Todos.TodosCompletedRoute = Ember.Route.extend({
+Todos.TodosCompletedRoute = Todos.LinkedRoute.extend({
   model: function() {
     return this.store.filter('todo', function(todo) {
       return todo.get('isCompleted');
     });
   },
-  activate: function() {
-    this.controllerFor('todos').initFocusedItem();
-  },
-  renderTemplate: function(controller) {
-    this.render('todos/index', {controller: controller});
+  renderTemplate: function(controller, model) {
+    this._super(controller, model);
   }
 });

@@ -25,13 +25,14 @@ Todos.TodoController = Ember.ObjectController.extend({
       this.set('isEditing', true);
     },
     acceptChanges: function() {
+      var todo = this.get('model');
       this.set('isEditing', false);
 
       if(Ember.isEmpty(this.get('model.title'))) {
         this.send('removeTodo');
       } else {
-        this.get('model').save();
-        this.get('controllers.todos').setAutoFocusedItem(this.get('model'));
+        todo.save();
+        this.get('controllers.todos').setAutoFocusedItem(todo);
       }
     },
     removeTodo: function() {
