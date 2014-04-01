@@ -6,10 +6,9 @@ Todos.Router.map(function() {
   });
 });
 
-Todos.TodosIndexRoute = Ember.Route.extend({
+Todos.TodosRoute =  Ember.Route.extend({
   model: function() {
-    console.debug('i am the index');
-    return this.modelFor('todos');
+    return this.store.find('todo');
   }
 });
 
@@ -27,9 +26,12 @@ Todos.LinkedRoute = Ember.Route.extend({
   }
 });
 
-Todos.TodosRoute =  Ember.Route.extend({
+Todos.TodosIndexRoute = Todos.LinkedRoute.extend({
   model: function() {
-    return this.store.find('todo');
+    return this.modelFor('todos');
+  },
+  renderTemplate: function(controller, model) {
+    this._super(controller, model);
   }
 });
 
