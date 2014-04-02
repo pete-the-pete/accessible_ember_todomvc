@@ -20,7 +20,7 @@ Todos.LinkedRoute = Ember.Route.extend({
     Promise.all([
       this.render('todos/index', {controller: controller})
     ]).then(function() {
-      var todo = controller.get('content').get('firstObject');
+      var todo = model.get('firstObject');
       that.controllerFor('todos').setAutoFocusedItem(todo);
     });
   }
