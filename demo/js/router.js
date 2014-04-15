@@ -13,16 +13,15 @@ Todos.TodosRoute =  Ember.Route.extend({
 });
 
 Todos.LinkedRoute = Ember.Route.extend({
+
   renderTemplate: function(controller, model) {
     var that = this;
 
-    // I think there is a bug in RSVP.Ember.all
-    Promise.all([
-      this.render('todos/index', {controller: controller})
-    ]).then(function() {
+    this.render('todos/index', {controller: controller});
+    Ember.run.later(this, function() {
       var todo = model.get('firstObject');
-      that.controllerFor('todos').setAutoFocusedItem(todo);
-    });
+      this.controllerFor('todos').setAutoFocusedItem(todo);
+    }, 500);
   }
 });
 

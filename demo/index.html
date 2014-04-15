@@ -6,6 +6,31 @@
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
+  <!-- todos template -->
+  <script type="text/x-handlebars" data-template-name="todos/index">
+    <ul id="todo-list">
+      {{#each itemController="todo"}}
+        {{#view Todos.TodoView}}
+          {{#if isEditing}}
+            {{edit-todo class="edit" value=title focus-out="acceptChanges" insert-newline="acceptChanges" viewName="createTodo"}}
+            <label {{bind-attr for="view.createTodo.elementId"}} class="screen-reader-text">
+              edit this to do item.
+            </label>
+          {{else}}
+            {{input type="checkbox" class="toggle" checked=toggleComplete viewName="checkBox"}}
+            <button class="edit-button screen-reader-text" {{action "editTodo"}}>edit {{title}}</button>
+            <label {{action "editTodo" on="doubleClick"}} {{bind-attr for="view.checkBox.elementId"}}>
+              {{title}}
+            </label>
+            <button {{action "removeTodo"}} class="destroy">
+              <span class="screen-reader-text">Remove {{title}} item</span>
+            </button>
+          {{/if}}
+        {{/view}}
+      {{/each}}
+    </ul>
+  </script>
+  <!-- end todos template -->
   <script type="text/x-handlebars" data-template-name="todos">
   <section id="todoapp">
     <header id="header">
@@ -59,31 +84,7 @@
     </script>
     <!-- end index template -->
 
-    <!-- todos template -->
-    <script type="text/x-handlebars" data-template-name="todos/index">
-      <ul id="todo-list">
-        {{#each itemController="todo"}}
-          {{#view Todos.TodoView}}
-            {{#if isEditing}}
-              {{edit-todo class="edit" value=title focus-out="acceptChanges" insert-newline="acceptChanges" viewName="createTodo"}}
-              <label {{bind-attr for="view.createTodo.elementId"}} class="screen-reader-text">
-                edit this to do item.
-              </label>
-            {{else}}
-              {{input type="checkbox" class="toggle" checked=toggleComplete viewName="checkBox"}}
-              <button class="edit-button screen-reader-text" {{action "editTodo"}}>edit {{title}}</button>
-              <label {{action "editTodo" on="doubleClick"}} {{bind-attr for="view.checkBox.elementId"}}>
-                {{title}}
-              </label>
-              <button {{action "removeTodo"}} class="destroy">
-                <span class="screen-reader-text">Remove {{title}} item</span>
-              </button>
-            {{/if}}
-          {{/view}}
-        {{/each}}
-      </ul>
-    </script>
-    <!-- end todos template -->
+    
 
     <script type="text/javascript" src="lib/jquery.min.js"></script>
     <script type="text/javascript" src="lib/handlebars.min.js"></script>

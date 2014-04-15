@@ -10,6 +10,7 @@ Todos.TodoView = Ember.View.extend({
   }.property('controller.isEditing'),
 
   applyFocus: function() {
+    console.debug(this.$());
     this.$().find('input:first').focus();
   },
 
